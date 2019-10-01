@@ -136,8 +136,7 @@ func (hc *Creater) Ensure(blackduck *blackduckapi.Blackduck) error {
 
 		if rc != nil && *rc.Spec.Replicas == 0 {
 			for _, replicationController := range cpList.ReplicationControllers {
-				if replicationController.GetName() == util.GetResourceName(blackduck.Name, util.BlackDuckName, "binaryscanner") ||
-					replicationController.GetName() == util.GetResourceName(blackduck.Name, util.BlackDuckName, "rabbitmq") {
+				if replicationController.GetName() != util.GetResourceName(blackduck.Name, util.BlackDuckName, "cfssl") {
 					replicationController.Spec.Replicas = util.IntToInt32(0)
 				}
 			}
